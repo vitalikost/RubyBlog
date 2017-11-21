@@ -12,7 +12,8 @@ class QuestionController < ApplicationController
   end
 
   def show
-    render html:"Goods add"
+  #  render html:"Goods add"
+    @question = Question.find(params[:id])
   end
 
   def index
