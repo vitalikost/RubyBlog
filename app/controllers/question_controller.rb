@@ -6,7 +6,10 @@ class QuestionController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    @question.save
+    if @question.save
+    else
+      render "new"
+    end
     redirect_to @question
 
   end
@@ -17,7 +20,7 @@ class QuestionController < ApplicationController
   end
 
   def index
-
+    @question = Question.all
   end
 
   private

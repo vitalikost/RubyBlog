@@ -1,0 +1,12 @@
+<h1>Список вопросов:</h1>
+
+<table>
+  <% @question.each do |question| %>
+      <tr>
+        <td><%= question.title %></td>
+        <td><%= link_to 'Посмотреть', question_path(question) %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Новый вопрос', new_question_path %>
