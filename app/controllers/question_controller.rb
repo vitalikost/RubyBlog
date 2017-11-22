@@ -1,5 +1,5 @@
 class QuestionController < ApplicationController
-
+  http_basic_authenticate_with name: "vitalik", password: "123", only: :destroy
   def edit
     @question = Question.find(params[:id])
   end
