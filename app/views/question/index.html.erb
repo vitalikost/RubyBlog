@@ -5,6 +5,11 @@
       <tr>
         <td><%= question.title %></td>
         <td><%= link_to 'Посмотреть', question_path(question) %></td>
+        <td><%= link_to 'Изменить', edit_question_path(question) %></td>
+        <td><%= link_to 'Удалить', question_path(question),
+                        method: :delete,
+                        data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
       </tr>
   <% end %>
 </table>
