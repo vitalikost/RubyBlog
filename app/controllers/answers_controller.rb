@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  http_basic_authenticate_with name: "vitalik", password: "123", except: [:index, :show]
+  #http_basic_authenticate_with name: "vitalik", password: "123", except: [:index, :show]
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)

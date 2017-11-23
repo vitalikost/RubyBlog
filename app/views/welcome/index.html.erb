@@ -1,2 +1,17 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1>Welcome</h1>
+
+<%= form_with scope: :email, local: true do |form| %>
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name %><br>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+<% end %>
+
+<%= link_to 'Регистрация:', new_welcome_path %>
+<p></p>
