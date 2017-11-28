@@ -1,0 +1,27 @@
+<h1>Регистрация:</h1>
+<%= form_for  @user  do |form| %>
+
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+
+    <p>
+      <%= form.label :email %><br>
+      <%= form.email_field :email %>
+    </p>
+
+    <p>
+      <%= form.label :password %><br>
+      <%= form.password_field :password %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+
+<% end %>
+
+
+
+<p>Find me in app/views/users/new.html.erb</p>

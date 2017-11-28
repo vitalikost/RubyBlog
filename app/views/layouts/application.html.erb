@@ -9,6 +9,11 @@
   </head>
 
   <body>
+  <%= current_user.name if current_user%>
+  <p>
+  <%= link_to 'Выйти', session_logout_path %>
+    <%= link_to 'Войти', session_login_path %>
+    <%= link_to 'Регистрация', registration_path %>
     <%= yield %>
   </body>
 </html>
