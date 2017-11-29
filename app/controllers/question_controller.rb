@@ -11,6 +11,7 @@ class QuestionController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
+    @question.like=0
     if @question.save
       redirect_to @question
     else
@@ -20,6 +21,18 @@ class QuestionController < ApplicationController
 
   def show
       @question = Question.find(params[:id])
+
+      if cookies[:views].present?
+        cookies[:views] = cookies[:views].to_i+1;
+      else
+        cookies[:views] = 1;
+      end
+
+      if cookies[:views].to_i > 3
+        cookies[:views]=1
+      end
+
+      @views = cookies[:views].to_i
   end
 
   def index

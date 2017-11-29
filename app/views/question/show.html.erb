@@ -56,3 +56,10 @@
     <% end %>
   <% end %>
 <%= link_to 'Назад', question_index_path %>
+
+<% if current_user %>
+<% else %>
+    <% if @views == 3 %>
+        <%= javascript_tag "alert('Вижу вам сдесь понравилось, для полного функционала зарегиструйтесь. Спасибо!')" %>
+    <% end %>
+<% end %>
