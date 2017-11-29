@@ -9,11 +9,20 @@
   </head>
 
   <body>
-  <%= current_user.name if current_user%>
-  <p>
-  <%= link_to 'Выйти', session_logout_path %>
-    <%= link_to 'Войти', session_login_path %>
-    <%= link_to 'Регистрация', registration_path %>
-    <%= yield %>
+
+
+   <% if current_user %>
+        <%= "Добрый день! " %>
+        <b>
+        <%= current_user.name%>
+        </b>
+        <%= link_to 'Выйти', session_logout_path %>
+   <% else %>
+        <%= link_to 'Войти', session_login_path %>
+        <%= link_to 'Регистрация', registration_path %>
+   <% end %>
+
+   <%= yield %>
+
   </body>
 </html>

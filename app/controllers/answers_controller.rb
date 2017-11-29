@@ -2,7 +2,10 @@ class AnswersController < ApplicationController
   #http_basic_authenticate_with name: "vitalik", password: "123", except: [:index, :show]
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.create(answer_params)
+    @answer = @question.answers.new(answer_params)
+    @answer.user_id = current_user.id
+    @answer.commenter = current_user.name
+    @answer.save
     redirect_to question_path(@question)
   end
 

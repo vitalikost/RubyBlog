@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20171128193853) do
     t.string "commenter"
     t.text "body"
     t.bigint "question_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20171128193853) do
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.text "text"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

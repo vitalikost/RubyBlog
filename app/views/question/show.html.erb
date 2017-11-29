@@ -1,15 +1,21 @@
 <p>
-  <strong>Title:</strong>
+  <strong>Заголовок:</strong>
   <%= @question.title %>
 </p>
 
 <p>
-  <strong>Text:</strong>
+  <strong>Автор:</strong>
+  <%= User.find(@question.user_id).name %>
+</p>
+
+<p>
+  <strong>Вопрос:</strong>
   <%= @question.text %>
 </p>
 
-<h2>Comments</h2>
+<h2>Ответы:</h2>
 <% @question.answers.each do |comment| %>
+
     <p>
       <strong>Автор:</strong>
       <%= comment.commenter %>
@@ -20,28 +26,29 @@
       <%= comment.body %>
     </p>
 
-    <p>
-      <%= link_to 'Destroy Comment', [comment.question, comment],
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
-    </p>
+    <% if current_user %>
+
+        <% if current_user.id == comment.user_id  %>
+          <p>
+            <%= link_to 'Удалить', [comment.question, comment],
+                        method: :delete,
+                        data: { confirm: 'Вы уверены?' } %>
+          </p>
+        <% end %>
+    <% end %>
 <% end %>
 
 
-<h2>Add a comment:</h2>
-<%= form_with(model: [ @question, @question.answers.build ], local: true) do |form| %>
-    <p>
-      <%= form.label :commenter %><br>
-      <%= form.text_field :commenter %>
-    </p>
-    <p>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-<% end %>
-
-
+<% if current_user %>
+  <h2>Добавить ответ:</h2>
+    <%= form_with(model: [ @question, @question.answers.build ], local: true) do |form| %>
+         <p>
+          <%= form.label :body %><br>
+          <%= form.text_area :body %>
+        </p>
+        <p>
+          <%= form.submit %>
+        </p>
+    <% end %>
+  <% end %>
 <%= link_to 'Назад', question_index_path %>

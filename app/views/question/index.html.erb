@@ -4,14 +4,22 @@
   <% @question.each do |question| %>
       <tr>
         <td><%= question.title %></td>
+        <td><%= User.find(question.user_id).name %></td>
         <td><%= link_to 'Посмотреть', question_path(question) %></td>
-        <td><%= link_to 'Изменить', edit_question_path(question) %></td>
-        <td><%= link_to 'Удалить', question_path(question),
-                        method: :delete,
-                        data: { confirm: 'Вы уверены?' } %></td>
+        <% if current_user%>
+            <% if current_user.id == question.user_id  %>
+                <td><%= link_to 'Изменить', edit_question_path(question) %></td>
+                <td><%= link_to 'Удалить', question_path(question),
+                                method: :delete,
+                                data: { confirm: 'Вы уверены?' } %></td>
+            <% end %>
+      <% end %>
       </tr>
       </tr>
   <% end %>
 </table>
 <p>
-<%= link_to 'Новый вопрос', new_question_path %>
+
+  <% if current_user %>
+    <%= link_to 'Новый вопрос', new_question_path %>
+  <% end %>
