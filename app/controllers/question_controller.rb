@@ -40,9 +40,24 @@ class QuestionController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-
     redirect_to question_index_path
   end
+
+
+  def likeup
+    @question = Question.find(params[:id])
+    @question.like=@question.like+1
+    @question.save
+    redirect_to @question
+  end
+
+  def likedown
+    @question = Question.find(params[:id])
+    @question.like=@question.like-1
+    @question.save
+    redirect_to @question
+  end
+
 
   private
   def question_params

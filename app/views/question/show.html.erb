@@ -1,18 +1,23 @@
 <p>
   <strong>Заголовок:</strong>
   <%= @question.title %>
-</p>
-
-<p>
   <strong>Автор:</strong>
   <%= User.find(@question.user_id).name %>
-</p>
+  <strong>Рейтинг:</strong>
+  <%= @question.like %>
+
 
 <p>
   <strong>Вопрос:</strong>
+  <br>
   <%= @question.text %>
 </p>
-
+    <% if current_user %>
+        <%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post %>
+        <b>|</b>
+        <%= link_to 'Не очень',likedown_path(id: @question.id), method: :post %>
+    <% end %>
+<hr>
 <h2>Ответы:</h2>
 <% @question.answers.each do |comment| %>
 
@@ -27,7 +32,6 @@
     </p>
 
     <% if current_user %>
-
         <% if current_user.id == comment.user_id  %>
           <p>
             <%= link_to 'Удалить', [comment.question, comment],
