@@ -16,7 +16,7 @@
       <% current_userlike = Userlike.where(id_user: current_user.id, id_question: @question.id ) %>
       <% if  current_userlike.length> 0 %>
             <% if Time.zone.now - current_userlike[0].created_at < 3600 %>
-              <%= link_to 'Я нередумал',likedown_path(id: @question.id), method: :post %>
+              <%= link_to 'Я передумал',likedown_path(id: @question.id), method: :post %>
             <% else %>
                 <%= "Уже голосовали" %>
             <% end %>
