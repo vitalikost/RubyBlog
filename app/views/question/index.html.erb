@@ -1,8 +1,16 @@
 <h1>Список вопросов:</h1>
 
 <table>
+
+  <tr>
+    <th>Рейтинг</th>
+    <th>Вопрос</th>
+    <th>Автор</th>
+  </tr>
+
   <% @question.each do |question| %>
       <tr>
+        <td><%= question.like %></td>
         <td><%= question.title %></td>
         <td><%= User.find(question.user_id).name %></td>
         <td><%= link_to 'Посмотреть', question_path(question) %></td>

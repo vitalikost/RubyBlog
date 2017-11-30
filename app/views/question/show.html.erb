@@ -13,9 +13,11 @@
   <%= @question.text %>
 </p>
     <% if current_user %>
-        <%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post %>
-        <b>|</b>
-        <%= link_to 'Не очень',likedown_path(id: @question.id), method: :post %>
+      <% if Userlike.where(id_user: current_user.id, id_question: @question.id ).length > 0 %>
+          <%= link_to 'Не очень',likedown_path(id: @question.id), method: :post %>
+        <% else %>
+          <%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post %>
+      <% end %>
     <% end %>
 <hr>
 <h2>Ответы:</h2>

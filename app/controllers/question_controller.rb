@@ -25,11 +25,7 @@ class QuestionController < ApplicationController
       if cookies[:views].present?
         cookies[:views] = cookies[:views].to_i+1;
       else
-        cookies[:views] = 1;
-      end
-
-      if cookies[:views].to_i > 3
-        cookies[:views]=1
+        cookies[:views] = {value:1, expires: 1.day.from_now };
       end
 
       @views = cookies[:views].to_i
@@ -52,7 +48,10 @@ class QuestionController < ApplicationController
 
   def destroy
     @question = Question.find(params[:id])
-    @question.destroy
+    id_destroy = @question.id
+    if @question.destroy
+      Userlike.where(id_question: id_destroy).destroy_all
+    end
     redirect_to question_index_path
   end
 
@@ -60,14 +59,18 @@ class QuestionController < ApplicationController
   def likeup
     @question = Question.find(params[:id])
     @question.like=@question.like+1
-    @question.save
+    if @question.save
+      Userlike.create(id_user: current_user.id, id_question: @question.id,like: 1)
+    end
     redirect_to @question
   end
 
   def likedown
     @question = Question.find(params[:id])
     @question.like=@question.like-1
-    @question.save
+    if @question.save
+      Userlike.where(id_user: current_user.id, id_question: @question.id).destroy_all
+    end
     redirect_to @question
   end
 
