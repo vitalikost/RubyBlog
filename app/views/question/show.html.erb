@@ -13,9 +13,14 @@
   <%= @question.text %>
 </p>
     <% if current_user %>
-      <% if Userlike.where(id_user: current_user.id, id_question: @question.id ).length > 0 %>
-          <%= link_to 'Не очень',likedown_path(id: @question.id), method: :post %>
-        <% else %>
+      <% current_userlike = Userlike.where(id_user: current_user.id, id_question: @question.id ) %>
+      <% if  current_userlike.length> 0 %>
+            <% if Time.zone.now - current_userlike[0].created_at < 3600 %>
+              <%= link_to 'Я нередумал',likedown_path(id: @question.id), method: :post %>
+            <% else %>
+                <%= "Уже голосовали" %>
+            <% end %>
+      <% else %>
           <%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post %>
       <% end %>
     <% end %>
