@@ -25,7 +25,7 @@ class QuestionController < ApplicationController
       if cookies[:views].present?
         cookies[:views] = cookies[:views].to_i+1;
       else
-        cookies[:views] = {value:1, expires: 1.day.from_now };
+        cookies[:views] = {value:1, expires: 24.hour.from_now };
       end
 
       @views = cookies[:views].to_i

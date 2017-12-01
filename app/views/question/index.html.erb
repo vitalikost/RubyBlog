@@ -3,14 +3,14 @@
 <table>
 
   <tr>
-    <th>Рейтинг</th>
-    <th>Вопрос</th>
-    <th>Автор</th>
+    <th width="50"><%= link_to 'Рейтинг', question_index_path(sort: 'like') %></th>
+    <th width="150"><%= link_to 'Вопрос', question_index_path(sort: 'question') %></th>
+    <th width="50"><%= link_to 'Автор', question_index_path(sort: 'user') %></th>
   </tr>
 
   <% @question.each do |question| %>
       <tr>
-        <td><%= question.like %></td>
+        <td><center><%= question.like %></center></td>
         <td><%= question.title %></td>
         <td><%= User.find(question.user_id).name %></td>
         <td><%= link_to 'Посмотреть', question_path(question) %></td>
