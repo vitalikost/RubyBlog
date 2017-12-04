@@ -33,6 +33,27 @@ class QuestionController < ApplicationController
 
   def index
     @question = Question.all
+    if params[:sort] == 'like'
+      @question = Question.all.order(:like);
+    end
+
+    if params[:sort] == 'question'
+      @question = Question.all.order(:title);
+    end
+
+    if params[:sort] == 'user'
+      @question = Question.all.order(:user_id);
+    end
+
+    if params[:sort] == 'datetime'
+      @question = Question.all.order(:created_at);
+    end
+
+    respond_to do |format|
+        format.html
+        format.js
+        format.json { render json:  @question.as_json}
+      end
   end
 
 

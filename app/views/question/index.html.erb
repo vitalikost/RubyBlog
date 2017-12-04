@@ -3,6 +3,7 @@
 <table>
 
   <tr>
+    <th width="150"><%= link_to 'Дата', question_index_path(sort: 'datetime') %></th>
     <th width="50"><%= link_to 'Рейтинг', question_index_path(sort: 'like') %></th>
     <th width="150"><%= link_to 'Вопрос', question_index_path(sort: 'question') %></th>
     <th width="50"><%= link_to 'Автор', question_index_path(sort: 'user') %></th>
@@ -10,7 +11,8 @@
 
   <% @question.each do |question| %>
       <tr>
-        <td><center><%= question.like %></center></td>
+        <td><%= question.created_at %></td>
+        <td><%= question.like %></td>
         <td><%= question.title %></td>
         <td><%= User.find(question.user_id).name %></td>
         <td><%= link_to 'Посмотреть', question_path(question) %></td>
