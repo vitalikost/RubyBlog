@@ -1,33 +1,9 @@
 <h1>Список вопросов:</h1>
 
-<table>
+  <div id="questions">
+     <%= render 'question' %>
+  </div>
 
-  <tr>
-    <th width="150"><%= link_to 'Дата', question_index_path(sort: 'datetime') %></th>
-    <th width="50"><%= link_to 'Рейтинг', question_index_path(sort: 'like') %></th>
-    <th width="150"><%= link_to 'Вопрос', question_index_path(sort: 'question') %></th>
-    <th width="50"><%= link_to 'Автор', question_index_path(sort: 'user') %></th>
-  </tr>
-
-  <% @question.each do |question| %>
-      <tr>
-        <td><%= question.created_at %></td>
-        <td><%= question.like %></td>
-        <td><%= question.title %></td>
-        <td><%= User.find(question.user_id).name %></td>
-        <td><%= link_to 'Посмотреть', question_path(question) %></td>
-        <% if current_user%>
-            <% if current_user.id == question.user_id  %>
-                <td><%= link_to 'Изменить', edit_question_path(question) %></td>
-                <td><%= link_to 'Удалить', question_path(question),
-                                method: :delete,
-                                data: { confirm: 'Вы уверены?' } %></td>
-            <% end %>
-      <% end %>
-      </tr>
-      </tr>
-  <% end %>
-</table>
 <p>
 
   <% if current_user %>
