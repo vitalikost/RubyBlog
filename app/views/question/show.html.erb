@@ -1,27 +1,28 @@
-<p>
-  <strong>Заголовок:</strong>
-  <%= @question.title %>
-  <strong>Автор:</strong>
-  <%= User.find(@question.user_id).name %>
-  <strong>Рейтинг:</strong>
-  <%= @question.like %>
+<div id="question">
+    <strong>Заголовок:</strong>
+    <%= @question.title %>
+    <strong>Автор:</strong>
+    <%= User.find(@question.user_id).name %>
+    <strong>Рейтинг:</strong>
+      <div id="LikeCount" style="display:inline" ><%= @question.like %></div>
+      <p>
+        <strong>Вопрос:</strong>
+        <br>
+        <%= @question.text %>
+      </p>
+</div>
 
 
-<p>
-  <strong>Вопрос:</strong>
-  <br>
-  <%= @question.text %>
-</p>
     <% if current_user %>
       <% current_userlike = Userlike.where(id_user: current_user.id, id_question: @question.id ) %>
       <% if  current_userlike.length> 0 %>
             <% if Time.zone.now - current_userlike[0].created_at < 3600 %>
-              <%= link_to 'Я передумал',likedown_path(id: @question.id), method: :post %>
+            <div id="LikeStatus"><%= link_to 'Я передумал',likedown_path(id: @question.id), method: :post, remote: true %></div>
             <% else %>
                 <%= "Уже голосовали" %>
             <% end %>
       <% else %>
-          <%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post %>
+        <div id="LikeStatus"><%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post, remote: true %></div>
       <% end %>
     <% end %>
 <hr>

@@ -83,7 +83,14 @@ class QuestionController < ApplicationController
     if @question.save
       Userlike.create(id_user: current_user.id, id_question: @question.id,like: 1)
     end
-    redirect_to @question
+
+    respond_to do |format|
+      format.html {redirect_to @question}
+      format.js
+      format.json { render json:  @question.as_json}
+    end
+
+
   end
 
   def likedown
@@ -92,7 +99,13 @@ class QuestionController < ApplicationController
     if @question.save
       Userlike.where(id_user: current_user.id, id_question: @question.id).destroy_all
     end
-    redirect_to @question
+
+    respond_to do |format|
+      format.html {redirect_to @question}
+      format.js
+      format.json { render json:  @question.as_json}
+    end
+
   end
 
 
