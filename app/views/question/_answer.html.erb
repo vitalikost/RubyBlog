@@ -1,0 +1,20 @@
+<% @question.answers.each do |comment| %>
+    <p>
+      <strong>Автор:</strong>
+      <%= comment.commenter %>
+    </p>
+
+    <p>
+      <strong>Ответ:</strong>
+      <%= comment.body %>
+    </p>
+    <% if current_user %>
+        <% if current_user.id == comment.user_id  %>
+            <p>
+              <%= link_to 'Удалить', [comment.question, comment],
+                          method: :delete,
+                          data: { confirm: 'Вы уверены?' }, remote: true %>
+            </p>
+        <% end %>
+    <% end %>
+<% end %>

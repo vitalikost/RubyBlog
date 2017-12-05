@@ -27,36 +27,16 @@
     <% end %>
 <hr>
 <h2>Ответы:</h2>
-<% @question.answers.each do |comment| %>
 
-    <p>
-      <strong>Автор:</strong>
-      <%= comment.commenter %>
-    </p>
-
-    <p>
-      <strong>Ответ:</strong>
-      <%= comment.body %>
-    </p>
-
-    <% if current_user %>
-        <% if current_user.id == comment.user_id  %>
-          <p>
-            <%= link_to 'Удалить', [comment.question, comment],
-                        method: :delete,
-                        data: { confirm: 'Вы уверены?' } %>
-          </p>
-        <% end %>
-    <% end %>
-<% end %>
+<div id="Answer"><%= render 'answer' %></div>
 
 
 <% if current_user %>
   <h2>Добавить ответ:</h2>
-    <%= form_with(model: [ @question, @question.answers.build ], local: true) do |form| %>
+    <%= form_with(model: [ @question, @question.answers.build ]) do |form| %>
          <p>
           <%= form.label :body %><br>
-          <%= form.text_area :body %>
+          <%= form.text_area :body, id:"question_body" %>
         </p>
         <p>
           <%= form.submit %>

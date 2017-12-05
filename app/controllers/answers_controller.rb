@@ -6,14 +6,24 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.commenter = current_user.name
     @answer.save
-    redirect_to question_path(@question)
+
+    respond_to do |format|
+      format.html {redirect_to question_path(@question)}
+      format.js
+      format.json { render json:  @answer.as_json}
+    end
+
   end
 
   def destroy
     @question = Question.find(params[:question_id])
     @answers = @question.answers.find(params[:id])
     @answers.destroy
-    redirect_to question_path(@question)
+    respond_to do |format|
+      format.html {redirect_to question_path(@question)}
+      format.js
+      format.json
+    end
   end
 
 

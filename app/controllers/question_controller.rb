@@ -29,6 +29,13 @@ class QuestionController < ApplicationController
       end
 
       @views = cookies[:views].to_i
+
+      respond_to do |format|
+        format.html
+        format.js
+        format.json { render json:  @question.as_json}
+      end
+
   end
 
   def index
