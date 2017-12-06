@@ -1,4 +1,5 @@
 <% @question.answers.each do |comment| %>
+  <div id=<%= 'answers_'+comment.id.to_s %>  >
     <p>
       <strong>Автор:</strong>
       <%= comment.commenter %>
@@ -17,4 +18,6 @@
             </p>
         <% end %>
     <% end %>
+  </div>
+
 <% end %>
