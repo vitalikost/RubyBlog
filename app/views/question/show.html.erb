@@ -30,7 +30,7 @@
 
 <div id="Answer"><%= render 'answer' %></div>
 
-
+<!--
 <% if current_user %>
   <h2>Добавить ответ:</h2>
     <%= form_with(model: [ @question, @question.answers.build ]) do |form| %>
@@ -43,6 +43,8 @@
         </p>
     <% end %>
   <% end %>
+-->
+
 <%= link_to 'Назад', question_index_path %>
 
 <% if current_user %>
@@ -51,3 +53,38 @@
         <%= javascript_tag "alert('Вижу вам сдесь понравилось, для полного функционала зарегиструйтесь. Спасибо!')" %>
     <% end %>
 <% end %>
+
+<script>
+    window.onload = function()
+    {
+        var masDOM = [];
+        var answers = document.getElementById("Answer");
+        var countchildren = answers.children.length;
+        if (countchildren>0)
+        {
+            for (var i = 0; i < countchildren; i++) {
+                var el = answers.children[i];
+                if (el.getAttribute("data-parent").length>0)
+                {
+                    masDOM.push(el);
+                }
+            }
+
+            if(masDOM.length>0)
+            {
+                for (var i = 0; i < masDOM.length; i++) {
+                    var el_chindren = masDOM[i];
+                    el_chindren.parentNode.removeChild(el_chindren);
+                    el_chindren.style.position = "relative";
+                    el_chindren.style.left = "30px";
+                    var id_parent = el_chindren.getAttribute("data-parent");
+                    var parent = document.getElementById(id_parent);
+                    if (parent){
+                        parent.appendChild(el_chindren);
+                    }
+                }
+            }
+
+        }
+    }
+</script>

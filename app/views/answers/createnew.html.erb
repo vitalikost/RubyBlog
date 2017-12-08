@@ -1,0 +1,19 @@
+<h1>Вопрос:</h1><%= @question.title %>
+<p><%= @question.text %>
+<h1>Ответ:</h1>
+<%= @parent.body %>
+
+<% if current_user %>
+    <h2>Добавить ответ:</h2>
+    <%= form_for(@answers, url: savenewanswers_path(@answers, id_question:@question.id, id_parent:@parent.id))  do |form| %>
+        <p>
+          <%= form.text_area :body %>
+        </p>
+
+        <p>
+          <%= form.submit %>
+        </p>
+
+    <% end %>
+
+<% end %>

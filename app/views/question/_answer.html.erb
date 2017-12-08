@@ -1,14 +1,13 @@
 <% @question.answers.each do |comment| %>
   <div id=<%= 'answers_'+comment.id.to_s %> data-parent = <%= 'answers_'+comment.parent.to_s if comment.parent > 0 %> >
-
+<!--
     <% if comment.parent >0 %>
       <p>
         <strong>id:</strong>
         <%= comment.parent %>
       </p>
     <% end %>
-
-
+-->
     <p>
       <strong>Автор:</strong>
       <%= comment.commenter %>
@@ -27,43 +26,12 @@
                           data: { confirm: 'Вы уверены?' }, remote: true %>
         <% end %>
 
-       
+          <%= link_to 'Ответить',createnewanswers_path(id_parent:comment.id, id_question:@question),
+                      method: :get %>
+
         </p>
 
     <% end %>
   </div>
 
 <% end %>
-
-<script>
-  window.onload = function()
-  {
-      var masDOM = [];
-      var answers = document.getElementById("Answer");
-      var countchildren = answers.children.length-1;//js block
-      if (countchildren>0)
-      {
-          for (var i = 0; i < countchildren; i++) {
-              var el = answers.children[i];
-              if (el.getAttribute("data-parent").length>0)
-              {
-                  masDOM.push(el);
-              }
-          }
-
-          if(masDOM.length>0)
-          {
-              for (var i = 0; i < masDOM.length; i++) {
-                  var el_chindren = masDOM[i];
-                  el_chindren.parentNode.removeChild(el_chindren);
-                  var id_parent = el_chindren.getAttribute("data-parent");
-                  var parent = document.getElementById(id_parent);
-                  if (parent){
-                      parent.appendChild(el_chindren);
-                  }
-              }
-          }
-
-      }
-  }
-</script>

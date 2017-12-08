@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post 'likeup' => 'question#likeup'
   post 'likedown' => 'question#likedown'
 
+  get 'createnewanswers' => 'answers#createnew'
+  post 'savenewanswers' => 'answers#create'
+
   post 'users' => 'users#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :question do
