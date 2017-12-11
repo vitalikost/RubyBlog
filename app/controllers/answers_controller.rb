@@ -13,9 +13,12 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user_id = current_user.id
     @answer.commenter = current_user.name
-    
-    @parent = @question.answers.find(params[:id_parent])
-    @answer.parent = @parent.id
+    if params[:id_parent].to_s == "0"
+      @answer.parent = 0
+    else
+      @parent = @question.answers.find(params[:id_parent])
+      @answer.parent = @parent.id
+    end
     @answer.save
 
     respond_to do |format|
@@ -39,7 +42,11 @@ class AnswersController < ApplicationController
 
   def createnew
     @question = Question.find(params[:id_question])
-    @parent = @question.answers.find(params[:id_parent])
+    if params[:id_parent].to_s == "0"
+      @parent = nil
+    else
+      @parent = @question.answers.find(params[:id_parent])
+    end
     @answers = @question.answers.new
   end
 

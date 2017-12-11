@@ -1,11 +1,17 @@
 <h1>Вопрос:</h1><%= @question.title %>
 <p><%= @question.text %>
-<h1>Ответ:</h1>
-<%= @parent.body %>
+  <% if @parent %>
+    <h1>Ответ:</h1>
+    <%= @parent.body %>
+    <%  idparent = @parent.id%>
+  <% else idparent = 0%>
+    <%  idparent = 0%>
+  <% end %>
 
 <% if current_user %>
     <h2>Добавить ответ:</h2>
-    <%= form_for(@answers, url: savenewanswers_path(@answers, id_question:@question.id, id_parent:@parent.id))  do |form| %>
+
+    <%= form_for(@answers, url: savenewanswers_path(@answers, id_question:@question.id, id_parent: idparent ))  do |form| %>
         <p>
           <%= form.text_area :body %>
         </p>
