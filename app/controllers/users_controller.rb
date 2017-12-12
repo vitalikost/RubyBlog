@@ -9,7 +9,14 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      redirect_to :back
+      redirect_to users_new_path
     end
   end
+
+
+  def show
+    @user = User.find(params[:id])
+    @question = Question.where(id:@user)
+  end
+
 end

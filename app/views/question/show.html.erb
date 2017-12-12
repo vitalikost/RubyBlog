@@ -33,9 +33,9 @@
 
 <% if current_user %>
   <h2>Добавить ответ:</h2>
-    <%= link_to 'Ответить',createnewanswers_path(id_parent:0, id_question:@question),method: :get %>
+    <%= link_to 'Добавить ответить',createnewanswers_path(id_parent:0, id_question:@question),method: :get %>
 <% end %>
-
+<br>
 <%= link_to 'Назад', question_index_path %>
 
 <% if current_user %>

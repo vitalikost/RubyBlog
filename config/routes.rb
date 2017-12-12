@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'session/logout'
   post 'session' => 'session#create'
   get 'users/new'
+  get 'users/show'
   get 'registration'=>'users#new'
 
   post 'likeup' => 'question#likeup'

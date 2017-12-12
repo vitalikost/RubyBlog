@@ -1,0 +1,17 @@
+<h1>Профайл</h1>
+<strong>Имя:</strong>
+<%= @user.name %>
+<p>
+<strong>Почта:</strong>
+<%= @user.email %>
+<p>
+<strong>Дата регистации:</strong>
+<%= @user.created_at %>
+<p>
+
+<h1>Список вопросов:</h1>
+<%= render 'question/question' %>
+<p>
+
+
+<%= link_to 'Назад', question_index_path %>

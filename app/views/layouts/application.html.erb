@@ -17,6 +17,7 @@
         <%= current_user.name%>
         </b>
         <%= link_to 'Выйти', session_logout_path %>
+        <%= link_to 'Профайл', users_show_path(id:current_user) %>
    <% else %>
         <%= link_to 'Войти', session_login_path %>
         <%= link_to 'Регистрация', registration_path %>
