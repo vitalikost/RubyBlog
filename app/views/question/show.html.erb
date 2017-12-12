@@ -24,6 +24,9 @@
       <% else %>
         <div id="LikeStatus"><%= link_to 'Хорошо',likeup_path(id: @question.id), method: :post, remote: true %></div>
       <% end %>
+
+      <%= link_to 'В избраные',add_path(id_user: current_user,id_question: @question.id ), method: :post, remote: true %>
+
     <% end %>
 <hr>
 <h2>Ответы:</h2>
