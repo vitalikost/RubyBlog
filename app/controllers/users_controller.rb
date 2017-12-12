@@ -31,9 +31,9 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to @question}
+      format.html {redirect_to favorite_path(id:@user)}
       format.js
-      format.json { render json:  @question.as_json}
+      format.json { render json:  @favorite.as_json}
     end
 
   end
@@ -44,12 +44,14 @@ class UsersController < ApplicationController
     Favorite.where(id_question:@question,id_user:@user ).destroy_all
 
     respond_to do |format|
-      format.html {redirect_to @question}
+      format.html {redirect_to favorite_path(id:@user)}
       format.js
-      format.json { render json:  @question.as_json}
+      #format.json { render json:  @question.as_json}
     end
+  end
 
-
+  def favorite
+    @favorite = Favorite.where(id_user: params[:id])
   end
 
 end

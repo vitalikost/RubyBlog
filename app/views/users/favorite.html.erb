@@ -1,0 +1,8 @@
+<h1> Избраные: </h1>
+
+<% @favorite.each do |favorite| %>
+    <%= Question.find(favorite.id_question).title %>
+    <%= link_to 'Посмотреть', question_path(Question.find(favorite.id_question)) %>
+    <%= link_to 'Убрать', remove_path(id_user: current_user,id_question: Question.find(favorite.id_question).id ), method: :post %>
+    <p>
+<% end %>
