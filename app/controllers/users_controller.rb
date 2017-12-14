@@ -7,6 +7,9 @@ class UsersController < ApplicationController
       @user =User.new(params.require(:user).permit(:name, :email,:password))
     if @user.save
       session[:user_id] = @user.id
+      # Сказать UserMailer отослать приветственное письмо после сохранения
+      UserMailer.with(user: @user).welcome_email.deliver_later
+
       redirect_to root_path
     else
       redirect_to users_new_path
